@@ -31,7 +31,7 @@ def fetch_weekly_reviews(start_date_str, end_date_str):
     start_date = datetime.datetime.strptime(start_date_str, "%Y-%m-%d").date()
     end_date = datetime.datetime.strptime(end_date_str, "%Y-%m-%d").date()
     
-    # Define your start URLs with complete URLs
+    # Define our start URLs with complete URLs of the restaurants
     start_urls = [
         {"url": "https://www.google.com/maps/place/Jumbo+Seafood/@42.350931,-71.0627748,17z/data=!4m8!3m7!1s0x89e37a7847ac82ad:0x59ee82a6474ad485!8m2!3d42.350931!4d-71.0601999!9m1!1b1!16s%2Fg%2F1tjt2z0n?hl=en-GB&entry=ttu&g_ep=EgoyMDI0MDkxOC4xIKXMDSoASAFQAw%3D%3D"},
         {"url": "https://www.google.com/maps/place/Rowayton+Seafood/@41.0640248,-74.4434072,9z/data=!4m11!1m3!2m2!1sseafood+restaurant+near+New+England!6e5!3m6!1s0x89e81fc9005d651d:0x197740d3504cf794!8m2!3d41.0640248!4d-73.4443415!15sCiNzZWFmb29kIHJlc3RhdXJhbnQgbmVhciBOZXcgRW5nbGFuZFolIiNzZWFmb29kIHJlc3RhdXJhbnQgbmVhciBuZXcgZW5nbGFuZJIBEnNlYWZvb2RfcmVzdGF1cmFudOABAA!16s%2Fg%2F1thvtqxf?authuser=0&entry=ttu&g_ep=EgoyMDI0MDkyMy4wIKXMDSoASAFQAw%3D%3D"},
@@ -53,7 +53,7 @@ def fetch_weekly_reviews(start_date_str, end_date_str):
         logger.error(f"Failed to run Apify actor: {e}")
         raise
     
-    # Retrieve data from the dataset
+    # Retrieve data from the dataset (APIFY)
     try:
         all_data = list(client.dataset(run["defaultDatasetId"]).iterate_items())
         logger.info(f"Fetched {len(all_data)} reviews before filtering.")
