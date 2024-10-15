@@ -46,7 +46,7 @@ def aggregate_data():
             aggregated_blobs.append((date, blob))
 
     if aggregated_blobs:
-        # Get the latest aggregated data file
+        # Get the latest aggregated review file
         latest_aggregated_date, latest_aggregated_blob = max(aggregated_blobs, key=lambda x: x[0])
         logger.info(f"Found existing aggregated data file: {latest_aggregated_blob.name}")
         temp_aggregated_file = download_json_from_gcs.submit(GCS_BUCKET_NAME, latest_aggregated_blob.name).result()
