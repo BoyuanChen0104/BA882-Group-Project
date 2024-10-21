@@ -6,7 +6,7 @@ from google.cloud import storage
 from datetime import datetime
 from prefect import task, flow, get_run_logger
 
-# Set up your environment variables
+# Set up environment variables
 GCS_BUCKET_NAME = os.getenv("GCS_BUCKET_NAME")
 
 @task
