@@ -30,8 +30,7 @@ def fetch_weekly_reviews(start_date_str, end_date_str):
     # Convert date strings to datetime objects with timezone info
     start_date = isoparse(start_date_str + 'T00:00:00Z')
     end_date = isoparse(end_date_str + 'T23:59:59Z')
-    
-    # Define your start URLs with complete URLs
+
     start_urls = [
         {"url": "https://www.google.com/maps/place/Atlantic+Fish+Company/@42.3555503,-71.1638682,13z/data=!4m12!1m2!2m1!1sboston+seafood+restaurant!3m8!1s0x89e37a0ef45076f1:0x62c7217ed7b7c8fb!8m2!3d42.3493054!4d-71.0812108!9m1!1b1!15sChlib3N0b24gc2VhZm9vZCByZXN0YXVyYW50WhsiGWJvc3RvbiBzZWFmb29kIHJlc3RhdXJhbnSSARJzZWFmb29kX3Jlc3RhdXJhbnTgAQA!16s%2Fg%2F1tdrgcm6?entry=ttu&g_ep=EgoyMDI0MTAwMi4xIKXMDSoASAFQAw%3D%3D "},
         {"url": "https://www.google.com/maps/place/Boston+Sail+Loft/@42.3624738,-71.1226418,13z/data=!4m12!1m2!2m1!1sboston+seafood+restaurant!3m8!1s0x89e3708836c43e2b:0x28f50a9a2cba0af8!8m2!3d42.3624738!4d-71.050544!9m1!1b1!15sChlib3N0b24gc2VhZm9vZCByZXN0YXVyYW50WhsiGWJvc3RvbiBzZWFmb29kIHJlc3RhdXJhbnSSARJzZWFmb29kX3Jlc3RhdXJhbnTgAQA!16s%2Fg%2F1vcjn7z7?entry=ttu&g_ep=EgoyMDI0MTAwMi4xIKXMDSoASAFQAw%3D%3D "},
@@ -152,7 +151,7 @@ def fetch_weekly_reviews(start_date_str, end_date_str):
         logger.error(f"Failed to run Apify actor: {e}")
         raise
     
-    # Retrieve data from the dataset
+    # Retrieve data from the Google Review
     try:
         all_data = list(client.dataset(run["defaultDatasetId"]).iterate_items())
         logger.info(f"Fetched {len(all_data)} reviews before filtering.")
