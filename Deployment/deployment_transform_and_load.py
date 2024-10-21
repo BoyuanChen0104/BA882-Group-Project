@@ -6,7 +6,7 @@ from google.cloud import storage
 import duckdb  # Import DuckDB
 from prefect import task, flow, get_run_logger
 
-# Set up your environment variables
+# Set up environment variables
 GCS_BUCKET_NAME = os.getenv("GCS_BUCKET_NAME")
 MOTHERDUCK_TOKEN = os.getenv("MOTHERDUCK_TOKEN")
 
@@ -117,6 +117,7 @@ def load_data_into_motherduck(csv_file):
     con = duckdb.connect(database='md:?motherduck_token={}'.format(MOTHERDUCK_TOKEN))
 
     # Create or replace the table in MotherDuck and insert data
+    # The table name is called 'review'
     con.execute("CREATE OR REPLACE TABLE reviews AS SELECT * FROM read_csv_auto(?);", (csv_file,))
 
     logger.info("Data loaded into MotherDuck.")
@@ -149,7 +150,7 @@ def transform_and_load_flow():
     # Save transformed data to CSV
     temp_csv_file = save_df_to_csv(transformed_df)
 
-    # Optionally upload CSV to GCS (if you want to keep a copy)
+    # Optionally upload CSV to GCS (for back-up)
     csv_blob_name = 'transformed_data.csv'
     upload_file_to_gcs(GCS_BUCKET_NAME, temp_csv_file, csv_blob_name)
 
