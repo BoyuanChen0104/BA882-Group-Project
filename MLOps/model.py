@@ -16,7 +16,6 @@ from hyperopt import fmin, tpe, hp, Trials, STATUS_OK
 import shap
 from sklearn.preprocessing import LabelEncoder
 
-# Initialize logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -25,7 +24,7 @@ MOTHERDUCK_TOKEN = os.getenv('MOTHERDUCK_TOKEN')
 if not MOTHERDUCK_TOKEN:
     raise ValueError("Please set the MOTHERDUCK_TOKEN environment variable.")
 
-# Initialize Weights & Biases
+# Initialize wandb
 wandb.init(project="lightgbm_regression", name="Hyperparameter_Tuning", reinit=True)
 
 @task
@@ -79,7 +78,7 @@ def load_and_merge_data():
 
 @task
 def prepare_data(df_aggregated):
-    # Feature engineering
+    # Feature engineering: intersaction between the sentimental value and total score (overall score for the restaurant)
     df_aggregated['topic_1_totalScore'] = df_aggregated['topic_1'] * df_aggregated['totalScore']
     df_aggregated['topic_2_totalScore'] = df_aggregated['topic_2'] * df_aggregated['totalScore']
     df_aggregated['topic_3_totalScore'] = df_aggregated['topic_3'] * df_aggregated['totalScore']
@@ -98,7 +97,7 @@ def prepare_data(df_aggregated):
     X = df_aggregated[features]
     y = df_aggregated[target]
 
-    # Calculate weights
+    # Calculate weights (some reviews are more important than others)
     df_aggregated['weight'] = (df_aggregated['reviewerNumberOfReviews'] + df_aggregated['number_review_image']) / (df_aggregated['reviewerNumberOfReviews'].mean() + df_aggregated['number_review_image'].mean())
 
     return X, y, df_aggregated['weight']
@@ -201,7 +200,7 @@ def save_results(conn, shap_values, X, mse, r2, adj_r2, latest_date):
     conn.register('shap_df', shap_df)
     conn.execute(f"CREATE OR REPLACE TABLE SHAP_{latest_date} AS SELECT * FROM shap_df")
 
-    # Save model performance
+    # Save the model performance
     performance_df = pd.DataFrame({
         'metric': ['MSE', 'R2', 'Adjusted_R2'],
         'value': [mse, r2, adj_r2]
