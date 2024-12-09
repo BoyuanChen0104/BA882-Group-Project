@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+duckdb
+duckduckgo_search
+langchain
+sentence-transformers
+tqdm
+google-cloud-aiplatform
+vertexai
