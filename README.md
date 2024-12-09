@@ -7,4 +7,5 @@ This repository contains a data pipeline developed to extract, process, and load
 This project was developed aiming to support business intelligence operations with the potential for future enhancements in machine learning applications. The pipeline leverages tools like Pandas for data manipulation and follows best practices for workflow management and data security. Sensitive information such as API tokens and credentials are securely managed using environment variables.
 
 Data Product 1: https://restaurant-recommendation-app-563110532586.us-central1.run.app (Recommendation Engine) 
+
 Data Product 2: https://restaurant-text-to-sql-563110532586.us-central1.run.app (Text2SQL Market Research Platform)
