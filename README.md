@@ -9,3 +9,6 @@ This project was developed aiming to support business intelligence operations wi
 Data Product 1: https://restaurant-recommendation-app-563110532586.us-central1.run.app (Recommendation Engine) 
 
 Data Product 2: https://restaurant-text-to-sql-563110532586.us-central1.run.app (Text2SQL Market Research Platform)
+
+
+<img width="752" alt="image" src="https://github.com/user-attachments/assets/c1aa10e3-3fc5-46c7-9318-a254549e7d12">
