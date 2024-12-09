@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+pinecone-client
+sentence-transformers
+tqdm
+google-cloud-aiplatform
+vertexai
